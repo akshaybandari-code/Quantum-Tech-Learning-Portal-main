@@ -1,0 +1,769 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>QuantumX Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        roboto: ["Roboto", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="font-roboto">
+    <!-- =====================================================signin Section======================================================== -->
+    <div id="signinSection" class="min-h-screen bg-[url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb')] bg-cover bg-center flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/70"></div>
+
+        <div class="relative bg-white/10 backdrop-blur-xl p-8 rounded-xl shadow-2xl w-96 text-white">
+            <h1 class="text-3xl font-bold text-center mb-2">Quantum Portal</h1>
+            <p class="text-center text-gray-300 mb-6">
+                Enter the world of Quantum Computing
+            </p>
+
+            <div class="space-y-4">
+                <input id="inputemail" type="email" placeholder="Email" class="w-full px-4 py-2 rounded bg-black/40 border border-gray-600 text-white" />
+
+                <div class="relative">
+                    <input id="input_id" type="password" placeholder="Enter your Id" class="w-full px-4 py-2 rounded bg-black/40 border border-gray-600 text-white pr-12" />
+                    <button type="button" id="toggleId" class="absolute right-3 top-1/2 -translate-y-1/2 text-white">
+                        Show
+                    </button>
+                </div>
+
+                <button id="saveBtn" class="w-full py-2 bg-cyan-500 hover:bg-cyan-600 rounded font-semibold">
+                    Sign In
+                </button>
+            </div>
+
+            <p class="text-center text-gray-300 mt-4">
+                New to Quantum?
+                <span id="showCreate" class="text-cyan-400 cursor-pointer hover:underline">
+                    Create account
+                </span>
+            </p>
+
+            <p id="signinMsg" class="text-center mt-4 text-sm font-semibold"></p>
+        </div>
+    </div>
+    <!-- =================================================create Account Section====================================================== -->
+    <div id="createSection" class="relative hidden min-h-screen bg-[url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb')] bg-cover flex items-center justify-center text-white">
+        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="bg-white/10 backdrop-blur-xl p-8 rounded-xl w-96">
+            <h2 class="text-2xl font-bold text-center mb-6">Create Account</h2>
+
+            <input id="name" type="text" placeholder="Name" class="w-full mb-3 px-4 py-2 rounded bg-black/40 border border-gray-600" />
+
+            <select id="gender" class="w-full mb-3 px-4 py-2 rounded bg-black/40 border border-gray-600">
+                <option value="noun">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <input id="email" type="email" placeholder="Email" class="w-full mb-3 px-4 py-2 rounded bg-black/40 border border-gray-600" />
+
+            <select id="status" class="w-full mb-4 px-4 py-2 rounded bg-black/40 border border-gray-600">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+
+            <button id="createAccountBtn" class="w-full py-2 bg-cyan-500 hover:bg-cyan-600 rounded font-semibold">
+                Create Account
+            </button>
+
+            <p id="createMsg" class="text-center mt-4 text-sm font-semibold"></p>
+
+            <p class="text-center mt-4 text-gray-300">
+                Already have an account?
+                <span id="showSignin" class="text-cyan-400 cursor-pointer hover:underline">
+                    Sign In
+                </span>
+            </p>
+        </div>
+    </div>
+    <!-- =====================================================After logine section==================================================== -->
+    <div id="afterlogine" class="hidden bg-[#0b0f1a] min-h-screen p-6">
+        <div class="bg-white max-w-7xl mx-auto rounded-3xl shadow-2xl">
+            <!--=========================== Navbar =============================== -->
+            <div class="flex justify-between items-center px-8 py-5 border-b">
+                <div class="flex items-center gap-10">
+                    <h1 class="text-xl font-bold text-purple-600">Quantum Tech</h1>
+
+                    <nav class="flex gap-6 text-sm text-gray-500">
+                        <a id="dashboardBtn" class="cursor-pointer text-black font-semibold">Dashboard</a>
+                        <a class="cursor-pointer" id="learnBtn">Learn</a>
+                        <a class="cursor-pointer" id="careerBtn">Cirriculum</a>
+                        <a class="cursor-pointer" id="simBtn">Experiments</a>
+                        <a class="cursor-pointer" id="researchBtn">Research</a>
+                    </nav>
+                </div>
+
+                <!--====================== Profile ==================================== -->
+
+                <div class="flex items-center gap-3">
+                    <p class="text-sm font-semibold">Hi,<span id="nameinDA"></span></p>
+                    <img id="profileBtn" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="w-10 h-10 rounded-full border-2 border-purple-500" />
+                </div>
+            </div>
+            <!-- ========================== DASHBOARD ================================== -->
+            <div id="dashboard" class="section p-8">
+                <div>
+                    <h2 class="text-2xl font-bold">Welcome to Quantum Tech</h2>
+                    <p class="text-sm text-gray-500">
+                        You're <span id="persentage"></span> to mastering Quantum Computing
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <div class="flex-1 min-w-[120px] bg-purple-50 p-4 rounded-xl text-center">
+                        <p id="classover" class="text-xl font-bold">0</p>
+                        <p class="text-xs text-gray-500">Qubits Learned</p>
+                    </div>
+                    <div class="flex-1 min-w-[120px] bg-cyan-50 p-4 rounded-xl text-center">
+                        <p id="moduleover" class="text-xl font-bold">0</p>
+                        <p class="text-xs text-gray-500">Modules</p>
+                    </div>
+                    <div class="flex-1 min-w-[120px] bg-indigo-50 p-4 rounded-xl text-center">
+                        <p id="filesuplode" class="text-xl font-bold">--</p>
+                        <p class="text-xs text-gray-500">Experiments</p>
+                    </div>
+                    <div class="flex-1 min-w-[120px] bg-emerald-50 p-4 rounded-xl text-center">
+                        <p class="text-xl font-bold">--</p>
+                        <p class="text-xs text-gray-500">Achievements</p>
+                    </div>
+                </div>
+                <div class="border rounded-2xl p-6 flex justify-between items-center mt-8">
+                    <div>
+                        <p class="text-xs text-gray-500">Current Module</p>
+                        <h3 class="text-lg font-semibold">Quantum Gates & Circuits</h3>
+
+                        <div class="w-64 h-2 bg-gray-200 rounded-full mt-3">
+                            <div id="progressBar" class="h-2 bg-purple-500 rounded-full" style="width: 0%"></div>
+                        </div>
+
+                        <p id="progressText" class="text-xs text-gray-500 mt-1">
+                            0% completed
+                        </p>
+                    </div>
+                    <div>
+                        <button id="resumeBtn" class="bg-black text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition">
+                            Resume Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================= LEARN ============================================ -->
+
+            <div id="learn" class="section hidden p-8">
+                <div class="flex gap-8">
+                    <div class="w-1/3 bg-white rounded-2xl shadow p-6 space-y-4">
+
+                        <div>
+                            <div id="module1Header" class="bg-gray-200 p-3 rounded-lg cursor-pointer font-semibold flex justify-between items-center">
+                                <span>Module 1</span>
+                                <svg id="arrow1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chevron-compact-down transition-transform duration-300" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67" />
+                                </svg>
+                            </div>
+
+                            <div id="module1Content" class="mt-2 space-y-3">
+                                <div id="class1" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 1
+                                </div>
+
+                                <div id="class2" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 2
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div id="module2Header" class="bg-gray-200 p-3 rounded-lg cursor-pointer font-semibold flex justify-between items-center">
+                                <span>Module 2</span>
+                                <svg id="arrow2" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chevron-compact-down transition-transform duration-300" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67" />
+                                </svg>
+                            </div>
+
+                            <div id="module2Content" class="hidden mt-2 space-y-3">
+                                <div id="class3" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 3
+                                </div>
+
+                                <div id="class4" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 4
+                                </div>
+
+                                <div id="class5" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 5
+                                </div>
+
+                                <div id="class6" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 6
+                                </div>
+
+                                <div id="class7" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 7
+                                </div>
+
+                                <div id="class8" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 8
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div id="module3Header" class="bg-gray-200 p-3 rounded-lg cursor-pointer font-semibold flex justify-between items-center">
+                                <span>Module 3</span>
+                                <svg id="arrow3" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chevron-compact-down transition-transform duration-300" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67" />
+                                </svg>
+                            </div>
+
+                            <div id="module3Content" class="hidden mt-2 space-y-3">
+                                <div id="class9" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 9
+                                </div>
+
+                                <div id="class10" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 10
+                                </div>
+
+                                <div id="class11" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 11
+                                </div>
+
+                                <div id="class12" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 12
+                                </div>
+
+                                <div id="class13" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 13
+                                </div>
+
+                                <div id="class14" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 14
+                                </div>
+
+                                <div id="class15" class="bg-gray-100 p-3 rounded cursor-pointer">
+                                    Class 15
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-2/3">
+                        <iframe id="mainPlayer" class="w-full h-[400px] rounded-2xl shadow" src="https://www.youtube.com/embed/X8MZWCGgIb8" allowfullscreen>
+                        </iframe>
+
+                        <h2 id="videoTitle" class="text-2xl font-bold mt-4">
+                            Your's first class
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div id="simulators" class="section hidden p-8">
+                <h2 class="text-2xl font-bold"></h2>
+                <h1>This page is comes leater</h1>
+            </div>
+
+            <div id="research" class="section hidden p-8 bg-gray-50 min-h-screen">
+
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                    Quantum Research Hub
+                </h2>
+
+                <div id="researchContainer" class="flex flex-wrap -m-1.5">
+
+                    <div class="researchCard w-full sm:w-1/2 lg:w-1/3 p-1.5  rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">Quantum Superposition</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Study of qubit state overlap and probabilistic measurement theory.
+                            </p>
+                            <a href="https://quantumtech.niat.tech/" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="researchCard w-full sm:w-1/2 lg:w-1/3 p-1.5 rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">IBM Quantum Research</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Explore IBM's real quantum processors and published research.
+                            </p>
+                            <a href="https://research.ibm.com/topics/quantum-computing" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="researchCard w-full sm:w-1/2 lg:w-1/3 p-1.5  rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">Google Quantum AI</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Quantum supremacy experiments and quantum processor research.
+                            </p>
+                            <a href="https://quantumai.google/" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="researchCard w-full sm:w-1/2 lg:w-1/3 p-1.5  rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">arxiv Quantum Papers</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Latest published quantum computing research papers.
+                            </p>
+                            <a href="https://arxiv.org/list/quant-ph/recent" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="researchCard w-full sm:w-1/2 lg:w-1/3 p-1.5  rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">Microsoft Quantum</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Quantum algorithms and Azure Quantum research initiatives.
+                            </p>
+                            <a href="https://www.microsoft.com/en-us/quantum" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="researchCard researchCardGlow w-full sm:w-1/2 lg:w-1/3 p-1.5 rounded-2xl shadow hover:shadow-xl transition">
+                        <div class="h-full p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                            <h3 class="text-lg font-semibold">Nature Quantum Research</h3>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Peer-reviewed quantum computing research publications.
+                            </p>
+                            <a href="https://www.nature.com/subjects/quantum-computing" target="_blank" class="mt-4 inline-block text-purple-600 font-semibold">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="bg-[#0b0f1a] text-gray-300 pt-16 rounded-xl mt-[25px] pb-8 border-t border-purple-500/20">
+                    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+
+                        <div>
+                            <h2 class="text-2xl font-bold text-white mb-4">
+                                Quantum<span class="text-purple-500">X</span>
+                            </h2>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Advancing Quantum Computing education through structured learning,
+                                real experiments, and global research resources.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-white font-semibold mb-4">Quantum Learning</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li><a class="hover:text-purple-400 cursor-pointer transition">Beginner Modules</a></li>
+                                <li><a class="hover:text-purple-400 cursor-pointer transition">Quantum Gates</a></li>
+                                <li><a class="hover:text-purple-400 cursor-pointer transition">Quantum Algorithms</a></li>
+                                <li><a class="hover:text-purple-400 cursor-pointer transition">Virtual Experiments</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div>
+                            <h3 class="text-white font-semibold mb-4">Research Resources</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>
+                                    <a href="https://research.ibm.com/topics/quantum-computing" target="_blank" class="hover:text-purple-400 transition">
+                                        IBM Quantum Research
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://quantumai.google/" target="_blank" class="hover:text-purple-400 transition">
+                                        Google Quantum AI
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://arxiv.org/list/quant-ph/recent" target="_blank" class="hover:text-purple-400 transition">
+                                        arXiv Quantum Papers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.microsoft.com/en-us/quantum" target="_blank" class="hover:text-purple-400 transition">
+                                        Microsoft Quantum
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-white font-semibold mb-4">Follow Us</h3>
+
+                            <div class="flex gap-4 mb-4">
+                                <a href="https://www.instagram.com/ganiii_019?igsh=M2VobmdjOGNtbm02" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-purple-500 transition">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+
+                                <a href="https://discord.gg/DGq837eA" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-purple-500 transition">
+                                    <i class="fa-brands fa-discord"></i>
+                                </a>
+
+                                <a href="https://linkedin.com/in/edhara-naga-sai-manohar-8907a5371" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-purple-500 transition">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </a>
+
+                                <a href="https://youtube.com/@bciheasrsayn?si=GfHUXJJZ0BGUChbg" target="_blank" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-purple-500 transition">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </a>
+                            </div>
+
+                            <p class="text-sm text-gray-400">
+                                Built by QuantumX Development Team
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-700 mt-12 pt-6 text-center text-sm text-gray-500">
+                        © 2026 QuantumX Portal | All Rights Reserved
+                    </div>
+                </footer>
+            </div>
+
+            <div id="careers" class="section hidden p-8">
+                <div class="max-w-7xl mx-auto p-8">
+                    <p class="text-gray-600 mb-8">
+                        Structured learning path from beginner to advanced concepts.
+                    </p>
+                    <div id="careerMainContent">
+                        <h2 class="text-3xl font-bold mb-2">
+                            Quantum Computing Theory Courses<span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
+                                    <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0m-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z" />
+                                </svg></span>
+                        </h2>
+                        <p class="text-gray-600 mb-8">
+                            Structured learning path from beginner to advanced concepts.
+                        </p>
+
+
+                        <h3 class="text-xl font-semibold mb-4 text-green-600">
+                            Beginner Level
+                        </h3>
+
+                        <div class="flex flex-wrap gap-6 mb-10">
+                            <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                                <h4 class="font-semibold text-lg">
+                                    Introduction to Quantum Computing
+                                </h4>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    What is quantum computing and why it matters.
+                                </p>
+                            </div>
+
+                            <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                                <h4 class="font-semibold text-lg">Classical Bits vs Qubits</h4>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    Understanding the difference between classical and quantum
+                                    systems.
+                                </p>
+                            </div>
+                        </div>
+                        <div id="Superposition" class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">Superposition</h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                How a qubit exists in multiple states simultaneously.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-4 text-yellow-600">
+                        Intermediate Level
+                    </h3>
+
+                    <div class="flex flex-wrap gap-6 mb-10">
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">Quantum Entanglement</h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Spooky action at a distance explained.
+                            </p>
+                        </div>
+
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">
+                                Quantum Gates (Conceptual)
+                            </h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Understanding how quantum operations work.
+                            </p>
+                        </div>
+
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">Bloch Sphere</h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Visual representation of qubit states.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">
+                        Advanced Theory
+                    </h3>
+
+                    <div class="flex flex-wrap gap-6">
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">
+                                Shor's Algorithm (Concept)
+                            </h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                How quantum computers factor large numbers.
+                            </p>
+                        </div>
+
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">
+                                Grover's Algorithm (Concept)
+                            </h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Quantum speedup in searching.
+                            </p>
+                        </div>
+
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer flex-1 min-w-[280px] max-w-sm">
+                            <h4 class="font-semibold text-lg">Quantum Supremacy</h4>
+                            <p class="text-sm text-gray-500 mt-2">
+                                When quantum computers outperform classical ones.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- read section -->
+                    <div id="showSuperposition" class="hidden">
+                        <!-- HEADER -->
+                        <header class="bg-white text-black px-10 py-8">
+                            <h1 class="text-3xl font-bold">Superposition in Quantum Computing</h1>
+                            <p class="text-black mt-2">Level: Beginner</p>
+                            <p class="text-black text-sm">Estimated Study Time: 20–25 minutes</p>
+                        </header>
+
+                        <main class="max-w-4xl mx-auto px-8 py-12 space-y-12">
+
+                            <!-- Learning Objectives -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-4">Learning Objectives</h2>
+                                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                                    <li>Understand what superposition means</li>
+                                    <li>Differentiate between classical bits and quantum states</li>
+                                    <li>Explain how a qubit can exist in multiple states simultaneously</li>
+                                    <li>Describe what happens when a quantum state is measured</li>
+                                </ul>
+                            </section>
+
+                            <!-- Introduction -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Superposition is one of the fundamental principles of quantum mechanics
+                                    and the core reason why quantum computing differs from classical computing.
+                                </p>
+                                <p class="mt-4 text-gray-700 leading-relaxed">
+                                    In classical systems, a bit can only exist in one of two states: 0 or 1.
+                                    However, a quantum bit (qubit) can exist in a combination of both states
+                                    at the same time. This ability is known as superposition.
+                                </p>
+                            </section>
+
+                            <!-- Classical vs Quantum -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-6">Classical vs Quantum State</h2>
+
+                                <div class="grid md:grid-cols-2 gap-8">
+
+                                    <div class="bg-white p-6 rounded-xl shadow">
+                                        <h3 class="text-xl font-semibold mb-3">Classical Bit</h3>
+                                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                            <li>Can be either 0 or 1</li>
+                                            <li>Cannot exist in both states simultaneously</li>
+                                        </ul>
+                                        <p class="mt-3 text-sm text-gray-600">
+                                            Example: A light switch is either ON or OFF.
+                                        </p>
+                                    </div>
+
+                                    <div class="bg-white p-6 rounded-xl shadow">
+                                        <h3 class="text-xl font-semibold mb-3">Quantum Bit (Qubit)</h3>
+                                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                            <li>Can be 0</li>
+                                            <li>Can be 1</li>
+                                            <li>Can be a combination of 0 and 1</li>
+                                        </ul>
+
+                                        <div class="mt-4 bg-gray-100 p-4 rounded text-center font-mono">
+                                            |ψ⟩ = α|0⟩ + β|1⟩
+                                        </div>
+
+                                        <p class="text-sm text-gray-600 mt-3">
+                                            Where |α|² + |β|² = 1
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </section>
+
+                            <!-- Analogy -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-4">Real-World Analogy</h2>
+                                <p class="text-gray-700 leading-relaxed">
+                                    A spinning coin explains superposition well.
+                                    When a coin lies flat, it is either heads or tails.
+                                    When spinning, it is in a combination state.
+                                </p>
+                            </section>
+
+                            <!-- Measurement -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-4">Measurement and Collapse</h2>
+                                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                                    <li>It collapses into either 0 or 1</li>
+                                    <li>The probability depends on α and β</li>
+                                </ul>
+                                <p class="mt-4 text-gray-700">
+                                    Before measurement → multiple possibilities
+                                    After measurement → single definite state
+                                </p>
+                            </section>
+
+                            <!-- Importance -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-4">Why Superposition is Important</h2>
+                                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                                    <li>Represents multiple possibilities simultaneously</li>
+                                    <li>Enables theoretical parallel computation</li>
+                                    <li>Foundation for quantum algorithms</li>
+                                </ul>
+                            </section>
+
+                            <!-- Quiz -->
+                            <section>
+                                <h2 class="text-2xl font-semibold mb-6">Mini Concept Check</h2>
+
+                                <div class="bg-white p-6 rounded-xl shadow space-y-6">
+
+                                    <!-- Q1 -->
+                                    <div>
+                                        <p class="font-medium mb-2">
+                                            1. How is a classical bit different from a qubit?
+                                        </p>
+                                        <label class="block">
+                                            <input type="radio" name="q1" value="correct" class="mr-2">
+                                            A qubit can exist in multiple states simultaneously
+                                        </label>
+                                        <label class="block">
+                                            <input type="radio" name="q1" value="wrong" class="mr-2">
+                                            Both are always either 0 or 1
+                                        </label>
+                                    </div>
+
+                                    <!-- Q2 -->
+                                    <div>
+                                        <p class="font-medium mb-2">
+                                            2. What happens when a qubit in superposition is measured?
+                                        </p>
+                                        <label class="block">
+                                            <input type="radio" name="q2" value="correct" class="mr-2">
+                                            It collapses to a definite state
+                                        </label>
+                                        <label class="block">
+                                            <input type="radio" name="q2" value="wrong" class="mr-2">
+                                            It stays in superposition forever
+                                        </label>
+                                    </div>
+
+                                    <!-- Q3 -->
+                                    <div>
+                                        <p class="font-medium mb-2">
+                                            3. Why is superposition important?
+                                        </p>
+                                        <label class="block">
+                                            <input type="radio" name="q3" value="correct" class="mr-2">
+                                            It enables quantum algorithms
+                                        </label>
+                                        <label class="block">
+                                            <input type="radio" name="q3" value="wrong" class="mr-2">
+                                            It makes classical computers faster
+                                        </label>
+                                    </div>
+
+                                    <button id="submitQuiz" class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition">
+                                        Submit Quiz
+                                    </button>
+
+                                    <p id="quizResult" class="font-semibold"></p>
+
+                                </div>
+                            </section>
+
+                        </main>
+
+                        <script src="superposition.js"></script>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="profile" class="section hidden p-8">
+                <h2 class="text-2xl font-bold mb-6">My Profile</h2>
+
+                <div class="max-w-4xl mx-auto bg-gray-50 rounded-3xl shadow-xl p-8">
+                    <div class="flex items-center gap-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="w-32 h-32 rounded-full border-4 border-purple-500" />
+                        <div>
+                            <h3 id="profileName" class="text-2xl font-bold text-gray-800"></h3>
+                            <p id="profileEmail" class="text-gray-600 mt-1"></p>
+                            <p id="profileGender" class="text-gray-600 mt-1"></p>
+                            <p id="profileStatus" class="text-gray-600 mt-1"></p>
+                            <p id="profileId" class="text-gray-600 mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-4xl mx-auto mt-8">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 border border-purple-100">
+
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-purple-600" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2z" />
+                            </svg>
+                            <h3 class="text-xl font-bold text-gray-800">
+                                Support Details
+                            </h3>
+                        </div>
+
+                        <div class="space-y-2 text-gray-600">
+                            <p><span class="font-semibold">Email:</span> bcharansaikumarreddy@gmail.com</p>
+                            <p><span class="font-semibold">Phone:</span> +91 78931 22815</p>
+                            <p><span class="font-semibold">Working Hours:</span> 9 AM – 4 PM, Mon–Sat</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jscode.js"></script>
+</body>
+
+</html>
